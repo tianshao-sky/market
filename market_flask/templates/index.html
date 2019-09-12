@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 150px;
+            float: left;
+            background-image: url('/static/index/1.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+            width: 760px;
+            height: 150px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 130px" id="header">
+    <div style="width: 1200px">
+        <div class="one"></div>
+        <div align="center" class="two"><p><font size="10"><b>并 西 西 商 场</b></font></p></div>
+        <div style="margin: 10px">
+            {% if contest.data == 1 %}
+                <a style="text-decoration:none" href="/register/"><font size="5">注册</font></a><br><br>
+                <a style="text-decoration:none" href="/login/"><font size="5">登录</font></a>
+            {% elif contest.data == 2 %}
+                <p style="color: yellow"><font size="5">欢迎：{{ contest.username }}</font></p>
+                <a style="text-decoration:none" href="/self_center/"><font size="3">个人中心</font></a><br>
+                <a style="text-decoration:none" href="/shopping_car/"><font size="3">我的购物车</font></a><br>
+                <a style="text-decoration:none" href="/logout/"><font size="3">注销</font></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div align="center">
+    <div style="width:1100px;height: 70px" align="center">
+        <form action="/index/" method="post">
+            <input style="width: 700px;height: 40px;background-color: white" type="text" name="key_word">
+            <input style="width: 100px;height: 40px;" type="submit" value="搜索">
+        </form>
+    </div>
+
+    <div align="center" style="width:1100px;height: 50px;"><h1>商品信息</h1></div>
+
+    <div style="width: 1100px;height: 1100px">
+        <div style="height: 60px;">
+            <table style="float: left;" cellpadding="8px">
+                <tr>
+                    <td align="center" style="width:150px;float: left">
+                        <font size="5"><a style="text-decoration:none" href="/class/">分类查看</a></font>
+                    </td>
+                    <td align="center" style="width:150px;float: left">
+                        <font size="5"><a style="text-decoration:none" href="/guess/">猜你喜欢</a></font>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        {% for key,value in contest.goods.items() %}
+            <table style="float: left;" cellpadding="8px">
+                <tr align="center">
+                    <td>
+                        <a href="/goods/?id={{ key }}"><img style="width: 200px;height: 250px" src="/static/goods/{{ key }}.jpg" alt=""></a>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td style="width: 200px;height: 50px;">
+                        {{ value }}
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width:1100px;height: 50px;">
+        <a href="/index/?key_word={{ contest.key_word }}">首页</a>
+        <a href="/index/?key_word={{ contest.key_word }}&page={{ contest.page_previous }}">上一页</a>
+        第{{ contest.page }}页/共{{ contest.pages }}页
+        <a href="/index/?key_word={{ contest.key_word }}&page={{ contest.page_next }}">下一页</a>
+        <a href="/index/?key_word={{ contest.key_word }}&page={{ contest.pages }}">尾页</a>
+    </div>
+</div>
+
+<div align="center" style="width: 150px;height:510px;position: fixed;bottom:70px;background-color: white">
+    <div style="height: 30px">推荐商品</div>
+    <a href="/goods/?id={{ contest.ad_goods1.0 }}"><img style="width:150px;height: 180px;" src="/static/goods/{{ contest.ad_goods1.0 }}.jpg" alt="广告位招租"></a>
+    <p>{{ contest.ad_goods1.1 }}</p>
+    <a href="/goods/?id={{ contest.ad_goods2.0 }}"><img style="width:150px;height: 180px;" src="/static/goods/{{ contest.ad_goods2.0 }}.jpg" alt="广告位招租"></a>
+    <p>{{ contest.ad_goods2.1 }}</p>
+</div>
+
+<div align="center" style="background-color: wheat;" id='bot'>
+    <div style="width: 1100px">
+        友情链接：<a href="https://www.taobao.com/" target="_blank">淘宝</a>
+        <a href="https://www.jd.com/" target="_blank">京东</a>
+        <a href="https://www.pinduoduo.com/" target="_blank">拼多多</a>
+    </div>
+</div>
+<div align="center" style="width: 50px;height:100px;position: fixed;bottom:70px;right:70px;background-color: white">
+    <a style="text-decoration: none" href="#header"><font size="5">/\</font></a><br><br>
+	<a style="text-decoration: none" href="#bot"><font size="5">\/</font></a>
+</div>
+
+<div align="center" style="width: 50px;height:130px;position: fixed;bottom:200px;right:70px;background-color: white">
+    <a style="text-decoration: none" href="/chat/"><font size="6">聊天室</font></a>
+</div>
+
+</body>
+</html>

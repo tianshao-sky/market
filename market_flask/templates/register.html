@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a>
+<div align="center"
+     style="width: 500px;height:480px;background-color: white;position: absolute;left: calc(50% - 250px);top: calc(50% - 240px);">
+    <p><font size="10">注册</font></p>
+    <hr>
+    <br>
+    <form action="/register/" method="post">
+        <h3 style="height: 10px;color: red">{{ contest.data }}</h3>
+        <p><font size="4">用户名：<input type="text" name="UserName"></font></p>
+        <p><font size="4">密码：<input type="password" name="PassWord1"></font></p>
+        <p><font size="4">确认密码：<input type="password" name="PassWord2"></font></p>
+        <p><font size="4">注册身份：
+            <input type="radio" checked="checked" name="limit" value="2"> 买家
+			<input type="radio" name="limit" value="1"> 卖家</font></p><br>
+        <input type="submit" value="提交">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="text-decoration:none" href="/login/">去登录</a>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评价</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            float: left;
+            background-image: url('/static/index/1.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: left;
+            margin: 0 0 0 100px
+        }
+
+        .two {
+            width: 760px;
+            height: 150px;
+            float: left;
+            position: absolute;
+            left: calc(50% - 380px);
+            top: calc(20% - 75px)
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div class="one"></div>
+<div align="center" class="two"><p><font size="10"><b>评 价</b></font></p></div>
+
+<div align="center" style="position: absolute;width:70%;top: 25%;left: 15%;">
+    <table border="1px">
+        <tr align="center">
+            <td>商品图片</td>
+            <td style="height: 100px;width: 450px"><img style="height: 150px;" src="/static/goods/{{ contest.shopped_info.0 }}.jpg" alt="未上传图片"></td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>商品名称</td>
+            <td >{{ contest.shopped_info.1 }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>评价</td>
+            <td>{{ contest.shopped_info.2 }}</td>
+            <td>
+                <form action="/change_word/?orders={{ contest.orders }}" method="post">
+                <textarea style="background-color:gray;" rows="6" name="words"></textarea>
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>评分</td>
+            <td>{{ contest.shopped_info.4 }}</td>
+            <td>
+            <form action="/change_word/?orders={{ contest.orders }}" method="post">
+                <select name="grade">
+                    <option></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>商家回复</td>
+            <td style="height: 100px;width: 450px">{{ contest.shopped_info.3 }}</td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+    <a style="text-decoration:none;" href="/self_center/"><font size="5">返回</font></a>
+    <div style="height: 200px;"></div>
+</div>
+
+</body>
+</html>

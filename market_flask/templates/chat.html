@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chat</title>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/index/"><img style="height: 200px"
+                                                                                             src="/static/index/1.png"
+                                                                                             alt=""></a>
+<div align="center"
+     style="width: 550px;height:480px;background-color: white;position: absolute;left: calc(50% - 250px);top: calc(50% - 240px);">
+    <p>你的名字：<input type="text" id="username" value={{ contest.user_name }}>
+        <button onclick="open_ws()">登陆聊天室</button>
+    </p>
+    <form onsubmit="return false;">
+        <h3>WebSocket 聊天室：</h3>
+        <textarea id="responseText" style="width: 500px; height: 300px;"></textarea>
+        <br>
+        给：<input type="text" id="to_user">消息内容：<input type="text" id="message">
+        <input type="button" value="发送消息" onclick="send_msg()">
+        <input type="button" onclick="javascript:document.getElementById('responseText').value=''"
+               value="清空聊天记录">
+    </form>
+</div>
+<script type="application/javascript">
+    var ws = null;
+
+    function open_ws() {
+        var username = document.getElementById('username').value;
+        ws = new WebSocket("ws://127.0.0.1:5000/ws/" + username);
+        ws.onopen = function () {
+            alert("登陆成功");
+        };
+
+        ws.onmessage = function (eventMessage) {
+            // 显示消息记录
+            var chat = JSON.parse(eventMessage.data);
+            console.log(chat);
+            var chat_content = document.getElementById('responseText');
+            chat_content.value = chat_content.value + "\n" + chat.from_user + " : " + chat.chat;
+        };
+    }
+
+    function send_msg() {
+        // 发送消息
+        var to_user = document.getElementById("to_user").value;
+        var msg = document.getElementById("message").value;
+        var send_str = {
+            to_user: to_user,
+            chat: msg
+        };
+        ws.send(JSON.stringify(send_str));
+        var chat_content = document.getElementById("responseText");
+        chat_content.value = chat_content.value + "\n" + "我： " + msg;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+            width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>个 人 中 心</b></font></p></div>
+        <div style="margin: 10px">
+            <a style="text-decoration:none" href="/change_info/"><font size="5">修改个人信息</font></a><br><br>
+            {% if contest.limit == 1 %}
+                <a style="text-decoration:none" href="/manage_goods/"><font size="5">管理销售商品</font></a><br><br>
+            {% elif contest.limit == 2 %}
+                <a style="text-decoration:none" href="/VIP/"><font size="5">成为VIP用户</font></a><br><br>
+            {% elif contest.limit == 3 %}
+                <p><font size="5">VIP用户</font></p>
+            {% endif %}
+            <a style="text-decoration:none" href="/browse/"><font size="5">浏览记录</font></a><br><br>
+            <a style="text-decoration:none" href="/get_money/"><font size="5">去提现</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none" href="/save_money/"><font size="5">去充值</font></a><br><br>
+        </div>
+    </div>
+</div>
+
+
+<div align="center" style="width: 100%;height: 50px;"><h1>已购商品</h1></div>
+
+<div align="center">
+    <div align="center" style="width: 70%;">
+        <table border="1px">
+            <tr align="center">
+                <td style="width: 150px">商品图片</td>
+                <td style="width: 200px">商品信息</td>
+                <td style="width: 200px">购买时间</td>
+                <td style="width: 200px">评价</td>
+                <td style="width: 100px">评分</td>
+                <td style="width: 70px"></td>
+            </tr>
+            {% for i in contest.shopped_info %}
+                <tr>
+                    <td align="center">
+                        <img style="height: 150px;" src="/static/goods/{{ i.0 }}.jpg" alt="未上传图片">
+                    </td>
+                    <td>
+                        名称：{{ i.1 }}<br>
+                        数量：{{ i.2 }}<br>
+                        价额：{{ i.3 }}
+                    </td>
+                    <td>
+                        {{ i.8 }}
+                    </td>
+                    <td style="width: 70px">
+                        评价：{{ i.4 }}<br>
+                        商家回复：{{ i.5 }}
+                    </td>
+                    <td>
+                        当前评分：{{ i.6 }}
+                    </td>
+                    <td align="center">
+                        <a style="text-decoration:none;" href="/change_word/?orders={{ i.7 }}">修改评价</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% if contest.limit == 1 %}
+    <br>
+    <div align="center" style="width: 100%;height: 50px;">
+        <h1>买家评价&nbsp;&nbsp;总收入：{{ contest.all_money }}</h1>
+
+    </div>
+    <div align="center">
+    <div align="center" style="width: 70%;">
+        <table border="1px">
+            <tr align="center">
+                <td style="width: 70px">买家</td>
+                <td style="width: 120px">商品信息</td>
+                <td style="width: 300px">买家评价</td>
+                <td style="width: 300px">回复</td>
+                <td style="width: 70px"></td>
+            </tr>
+            {% for i in contest.goods_word %}
+                <tr>
+                    <td align="center">{{ i.0 }}</td>
+                    <td>
+                        名称：{{ i.1 }}<br>
+                        数量：{{ i.5 }}<br>
+                        单价：{{ i.6 }}<br>
+                        评分：{{ i.7 }}<br>
+                    </td>
+                    <td>{{ i.2 }}</td>
+                    <td>{{ i.3 }}</td>
+                    <td><a style="text-decoration:none;" href="/change_word_answer/?orders={{ i.4 }}">修改回复</a></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endif %}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更改库存</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            float: left;
+            background-image: url('/static/index/1.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: left;
+            margin: 0 0 0 100px
+        }
+
+        .two {
+            width: 760px;
+            height: 150px;
+            float: left;
+            position: absolute;
+            left: calc(50% - 380px);
+            top: calc(20% - 75px)
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div class="one"></div>
+<div align="center" class="two"><p><font size="10"><b>商 品 修 改</b></font></p></div>
+
+<div align="center" style="position: absolute;width:70%;top: 25%;left: 15%;">
+    <table border="1px">
+        <tr align="center">
+            <td>商品图片</td>
+            <td style="height: 100px;width: 450px"><img style="height: 150px;" src="/static/goods/{{ contest.goods_id }}.jpg" alt="未上传图片"></td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>商品名称</td>
+            <td style="height: 100px;width: 450px">{{ contest.name }}</td>
+            <td>
+            <form action="/change_goods_num/?id={{ contest.goods_id }}" method="post">
+                <textarea style="background-color:gray;" rows="6" name="newName"></textarea>
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>商品简介</td>
+            <td style="height: 100px;width: 450px">{{ contest.info }}</td>
+            <td>
+            <form action="/change_goods_num/?id={{ contest.goods_id }}" method="post">
+                <textarea style="background-color:gray;" rows="6" name="newInfo"></textarea>
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>商品价格</td>
+            <td style="height: 100px;width: 450px">{{ contest.price }}</td>
+            <td>
+            <form action="/change_goods_num/?id={{ contest.goods_id }}" method="post">
+                <input style="background-color:gray;" type="text" name="newPrice">
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>商品库存</td>
+            <td>{{ contest.reman_num }}</td>
+            <td style="height: 100px;width: 450px">
+            <form action="/change_goods_num/?id={{ contest.goods_id }}" method="post">
+                <input style="background-color:gray;" type="text" name="newRemen_nums">
+                <input type="submit" value="提交">
+            </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>商品销量</td>
+            <td style="height: 100px;width: 450px">{{ contest.sold_num }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>商品分类</td>
+            <td style="height: 100px;width: 450px">{{ contest.class }}</td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+    <a style="text-decoration:none;" href="/self_center/"><font size="5">返回</font></a>
+    <div style="height: 200px;"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>猜你喜欢</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+            width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>猜 你 喜 欢</b></font></p></div>
+    </div>
+</div>
+
+<div align="center">
+    <div style="width:1100px;height: 1100px" align="center">
+        {% for key,value in contest.goods.items() %}
+            <table style="float: left;" cellpadding="8px">
+                <tr align="center">
+                    <td>
+                        <a href="/goods/?id={{ key }}"><img style="width: 200px;height: 250px"
+                                                            src="/static/goods/{{ key }}.jpg" alt=""></a>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td style="width: 200px;height: 50px;">
+                        {{ value }}
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width:1100px;height: 50px;">
+        <a href="/guess/">首页</a>
+        <a href="/guess/?page={{ contest.page_previous }}">上一页</a>
+        第{{ contest.page }}页/共{{ contest.pages }}页
+        <a href="/guess/?page={{ contest.page_next }}">下一页</a>
+        <a href="/guess/?page={{ contest.pages }}">尾页</a>
+    </div>
+</div>
+
+</body>
+</html>

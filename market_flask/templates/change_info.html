@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            float: left;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: left;
+            margin: 0 0 0 100px
+        }
+
+        .two {
+            width: 760px;
+            height: 150px;
+            float: left;
+            position: absolute;
+            left: calc(50% - 380px);
+            top: calc(20% - 75px)
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div class="one"><a href="/self_center/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+<div align="center" class="two"><p><font size="10"><b>个 人 信 息</b></font></p></div>
+
+
+<div align="center" style="position: absolute;width:70%;top: 40%;left: 15%;">
+    <table align="center" border="1px" width=100%>
+        <tr align="center">
+            <td>编号</td>
+            <td>{{ contest.data.user_id }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>用户名</td>
+            <td>{{ contest.data.user_name }}</td>
+            <td>
+                <form action="/change_info/" method="post">
+                    <input style="background-color:gray;" type="text" name="newUsername">
+                    <input type="submit" value="提交">
+                </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>密码</td>
+            <td>{{ contest.data.user_password }}</td>
+            <td>
+                <form action="/change_info/" method="post">
+                    <input style="background-color:gray;" type="password" name="newPassword">
+                    <input type="submit" value="提交">
+                </form>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>身份</td>
+            {% if limit == 1 %}
+                <td>卖家</td>
+            {% elif limit == 2 %}
+                <td>普通买家</td>
+            {% elif limit == 3 %}
+                <td>VIP买家</td>
+            {% endif %}
+
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>余额</td>
+            <td>{{ contest.data.user_balance }}</td>
+            <td></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
