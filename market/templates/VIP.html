@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VIP</title>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a>
+<div align="center"
+     style="width: 500px;height:480px;background-color: white;position: absolute;left: calc(50% - 250px);top: calc(50% - 240px);">
+    <p><font size="10">成为VIP</font></p>
+    <hr>
+    <br>
+    <form action="/VIP/" method="post">
+        {% csrf_token %}
+        <h3 style="color: red;height: 10px;">{{ data }}</h3>
+        <p>支付998即可98会员，享受98折优惠</p><br>
+        <p><font size="4">余额：{{ balance }}</font></p><br>
+
+        <input type="submit" value="支付">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="text-decoration:none" href="/save_money/">去充值</a>
+    </form>
+</div>
+
+</body>
+</html>

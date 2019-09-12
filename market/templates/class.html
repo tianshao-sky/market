@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类查看</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>分 类 查 看</b></font></p></div>
+    </div>
+</div>
+
+<div align="center">
+    <div style="width:1100px;height: 1100px" align="center">
+        <div align="left" style="height: 60px;width: 1000px">
+            <form action="/class/" method="post">
+                {% csrf_token %}
+                <select style="width: 200px;height: 30px;" name="class_name">
+                    <option></option>
+                    <option value="服饰">服饰</option>
+                    <option value="数码">数码</option>
+                    <option value="电脑">电脑</option>
+                    <option value="手机">手机</option>
+                    <option value="食品">食品</option>
+                    <option value="茶酒">茶酒</option>
+                    <option value="大家电">大家电</option>
+                    <option value="图书音像">图书音像</option>
+                    <option value="教育">教育</option>
+                </select>
+                <input type="submit" value="查看">
+            </form>
+
+        </div>
+        {% for key,value in goods.items %}
+            <table style="float: left;" cellpadding="8px">
+                <tr align="center">
+                    <td>
+                        <a href="/goods/?id={{ key }}"><img style="width: 200px;height: 250px"
+                                                            src="/static/goods/{{ key }}.jpg" alt=""></a>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td style="width: 200px;height: 50px;">
+                        {{ value }}
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width:1100px;height: 50px;">
+        <a href="/class/?class_name={{ class_name }}">首页</a>
+        <a href="/class/?class_name={{ class_name }}&page={{ page_previous }}">上一页</a>
+        第{{ page }}页/共{{ pages }}页
+        <a href="/class/?class_name={{ class_name }}&page={{ page_next }}">下一页</a>
+        <a href="/class/?class_name={{ class_name }}&page={{ pages }}">尾页</a>
+    </div>
+</div>
+</body>
+</html>

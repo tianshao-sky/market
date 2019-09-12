@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回复</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            background-image: url('/static/index/1.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: left;
+            margin: 0 0 0 100px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 150px;
+            float: left;
+            position: absolute;
+            left: calc(50% - 380px);
+            top: calc(20% - 75px)
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div class="one"></div>
+<div align="center" class="two"><p><font size="10"><b>回 复</b></font></p></div>
+
+<div align="center" style="position: absolute;width:70%;top: 25%;left: 15%;">
+    <table border="1px">
+        <tr align="center">
+            <td width="100px">买家</td>
+            <td width="350px">{{ shopped_info.0 }}</td>
+            <td width="350px"></td>
+        </tr>
+        <tr align="center">
+            <td>商品名称</td>
+            <td>{{ shopped_info.1 }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>数量/单价</td>
+            <td>
+                数量：{{ shopped_info.4 }}<br>
+                单价：{{ shopped_info.5 }}
+            </td>
+            <td></td>
+        </tr>
+
+        <tr align="center">
+            <td>评价</td>
+            <td>{{ shopped_info.2 }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>评分</td>
+            <td>{{ shopped_info.6 }}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>回复</td>
+            <td>{{ shopped_info.3 }}</td>
+            <td>
+                <form action="/change_word_answer/?orders={{ orders }}" method="post">
+                    {% csrf_token %}
+                    <textarea style="background-color:gray;" rows="6" name="word_answer"></textarea>
+                    <input type="submit" value="提交">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <a style="text-decoration:none;" href="/self_center/"><font size="5">返回</font></a>
+    <div style="height: 200px;"></div>
+</div>
+</body>
+</html>

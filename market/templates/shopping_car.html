@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物车</title>
+    <script language="JavaScript">
+        function mul(a, b) {
+            var c;
+            c = a * b;
+            document.write(c);
+        }
+    </script>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>我 的 购 物 车</b></font></p></div>
+    </div>
+</div>
+
+<div align="center" style="width: 100%;height: 50px;"><h1>购物车商品</h1></div>
+<div align="center">
+    <div align="center" style="width: 70%;">
+
+        <table border="1px">
+            <tr align="center">
+                <td style="width: 200px">商品图片</td>
+                <td style="width: 200px">商品信息</td>
+                <td style="width: 200px">购买数量</td>
+                <td style="width: 200px">金额</td>
+            </tr>
+            {% for i in goods_info %}
+                <tr>
+                    <td align="center">
+                        <img style="height: 150px;" src="/static/goods/{{ i.0 }}.jpg" alt="未上传图片">
+                    </td>
+                    <td>
+                        名称：{{ i.2 }}<br>
+                        售价：{{ i.3 }}<br>
+                        当前库存：{{ i.4 }}<br>
+                    </td>
+                    <td align="center">
+                        {{ i.1 }}
+                        <form action="/shopping_car/" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="{{ i.6 }}">
+                            <input type="submit" value="修改">
+                        </form>
+                    </td>
+                    <td align="center">
+                        <script>mul({{ i.1 }}, {{ i.3 }})</script>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"></td>
+                {% if limit == '3' %}
+                    <td align="center">折后总金额：{{ sum_money }}</td>
+                {% else %}
+                    <td align="center">总金额：{{ sum_money }}</td>
+                {% endif %}
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+<br>
+<div align="center">
+    <div align="center">
+        <a methods="post" href="/pay/"><font size="5">支付</font></a>
+    </div>
+
+</div>
+
+</body>
+</html>

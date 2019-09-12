@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付</title>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+    <a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/shopping_car/"><img style="height: 200px" src="/static/index/1.png" alt=""></a>
+    <div align="center"
+     style="width: 500px;height:480px;background-color: white;position: absolute;left: calc(50% - 250px);top: calc(50% - 240px);">
+    <p><font size="10">支付</font></p>
+    <hr>
+    <br>
+    <form action="/pay/" method="post">
+        {% csrf_token %}
+        <h3 style="color: red;height: 60px;">{{ data }}</h3>
+        <p><font size="4">余额：{{ balance }}</font></p>
+        <p><font size="4">支付金额：{{ pay }}</font></p><br>
+
+        <input type="submit" value="支付">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="text-decoration:none" href="/save_money/">去充值</a><br><br>
+
+    </form>
+</div>
+
+</body>
+</html>

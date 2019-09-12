@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加商品</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 100px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 150px;
+            float: left;
+            position: absolute;
+            left: calc(50% - 380px);
+            top: calc(20% - 75px)
+
+        }
+
+
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/manage_goods/"><img style="height: 200px" src="/static/index/1.png" alt=""></a>
+<div align="center" class="two"><p><font size="10"><b>增 加 商 品</b></font></p></div>
+
+<div align="center" style="position: absolute;width:70%;top: 30%;left: 15%;">
+    <table align="center" border="1px" width=100%>
+        <tr align="center">
+            <td>商品图片</td>
+            <td>商品名称</td>
+            <td>商品简介</td>
+            <td>商品价格</td>
+            <td>商品数量</td>
+            <td>商品分类1</td>
+            <td>商品分类2</td>
+            <td>商品分类3</td>
+        </tr>
+        <form action="/add_goods/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <tr align="center">
+                <td><input type="file" name="img" ><br></td>
+                <td><textarea name="goods_name" rows="10">名称</textarea></td>
+                <td><textarea name="info" rows="10">简介</textarea></td>
+                <td><textarea name="goods_price" rows="10">价格</textarea></td>
+                <td><textarea name="goods_reman_nums" rows="10">数量</textarea></td>
+                <td>
+                    <select name="goods_class1">
+                        <option></option>
+                        <option value="服饰">服饰</option>
+                        <option value="数码">数码</option>
+                        <option value="电脑">电脑</option>
+                        <option value="手机">手机</option>
+                        <option value="食品">食品</option>
+                        <option value="茶酒">茶酒</option>
+                        <option value="大家电">大家电</option>
+                        <option value="图书音像">图书音像</option>
+                        <option value="教育">教育</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="goods_class2">
+                        <option></option>
+                        <option value="服饰">服饰</option>
+                        <option value="数码">数码</option>
+                        <option value="电脑">电脑</option>
+                        <option value="手机">手机</option>
+                        <option value="食品">食品</option>
+                        <option value="茶酒">茶酒</option>
+                        <option value="大家电">大家电</option>
+                        <option value="图书音像">图书音像</option>
+                        <option value="教育">教育</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="goods_class3">
+                        <option></option>
+                        <option value="服饰">服饰</option>
+                        <option value="数码">数码</option>
+                        <option value="电脑">电脑</option>
+                        <option value="手机">手机</option>
+                        <option value="食品">食品</option>
+                        <option value="茶酒">茶酒</option>
+                        <option value="大家电">大家电</option>
+                        <option value="图书音像">图书音像</option>
+                        <option value="教育">教育</option>
+                    </select>
+                </td>
+            </tr>
+            <tr align="center">
+                <td colspan="8"><input type="submit" value="提交"></td>
+            </tr>
+        </form>
+    </table>
+    <div align="center" style="color:red;position: absolute;left: 50%"><h3>{{ data }}</h3></div>
+</div>
+
+
+
+
+</body>
+</html>

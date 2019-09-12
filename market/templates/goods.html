@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>商 品 详 情</b></font></p></div>
+        <div style="margin: 10px">
+            <br>
+            <a style="text-decoration:none" href="/shopping_car/"><font size="5">我的购物车</font></a><br><br>
+        </div>
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width: 70%;">
+
+        <table border="1px">
+            <tr align="center">
+                <td>商品图片</td>
+                <td>商品信息</td>
+                <td>选择</td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <img style="height: 250px" src="/static/goods/{{ goods_id }}.jpg" alt="未上传图片">
+                </td>
+                <td>
+                    名称：{{ goods_info.0 }}<br>
+                    简介：{{ goods_info.1 }}<br>
+                    价格：{{ goods_info.2 }}<br>
+                    商家：{{ goods_info.6 }}<br>
+                    库存：{{ goods_info.3 }}<br>
+                    销量：{{ goods_info.4 }}<br>
+                    评分：{{ goods_info.5 }}<br>
+                </td>
+                <td align="center">
+                    <form action="/goods/?id={{ goods_id }}" method="post">
+                        {% csrf_token %}
+                        购买数量：<input type="text" name="order_nums"><br><br>
+                        <input type="submit" value="加入购物车">
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <h3 style="color: red">{{ data }}</h3>
+    </div>
+</div>
+
+</body>
+</html>

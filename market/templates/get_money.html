@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现</title>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+    <a style="text-decoration:none;position:absolute;left: 100px;top: 25px;" href="/self_center/"><img style="height: 200px" src="/static/index/1.png" alt=""></a>
+    <div align="center"
+     style="width: 500px;height:480px;background-color: white;position: absolute;left: calc(50% - 250px);top: calc(50% - 240px);">
+    <p><font size="10">提现</font></p>
+    <hr>
+    <br>
+    <form action="/get_money/" method="post">
+        {% csrf_token %}
+        <h3 style="color: red;height: 60px;">余额：{{ balance }}<br>{{ data }}</h3>
+        <p><font size="4">提现金额：<input type="text" name="money"></font></p><br>
+
+        <input type="submit" value="提现">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="text-decoration:none" href="/save_money/">去充值</a><br><br>
+
+    </form>
+</div>
+</body>
+</html>

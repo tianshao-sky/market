@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览记录</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/self_center/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>浏 览 记 录</b></font></p></div>
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width: 70%;">
+        <table border="1px">
+            <tr align="center">
+                <td style="width: 150px">商品图片</td>
+                <td style="width: 400px">商品信息</td>
+                <td style="width: 300px">浏览时间</td>
+            </tr>
+            {% for i in browse_info %}
+                <tr>
+                    <td align="center">
+                        <img style="height: 150px;" src="/static/goods/{{ i.0 }}.jpg" alt="未上传图片">
+                    </td>
+                    <td>
+                        名称：{{ i.2 }}<br>
+                        简介：{{ i.3 }}<br>
+                        价额：{{ i.4 }}<br>
+                        卖家：{{ i.5 }}
+                    </td>
+                    <td align="center">{{ i.1 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

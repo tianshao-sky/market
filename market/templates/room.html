@@ -1,0 +1,76 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>聊天室</title>
+    <style>
+        .one {
+        {% load static %} width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 0 0 30px
+        }
+
+        .two {
+        {% load static %} width: 760px;
+            height: 200px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/index/bg.jpg');background-repeat: no-repeat;background-attachment: fixed;background-size:100% 110%">
+<div align="center" style="height: 200px;" id="header">
+    <div style="width: 1200px">
+        <div class="one"><a href="/index/"><img style="height: 200px" src="/static/index/1.png" alt=""></a></div>
+        <div align="center" class="two"><p><font size="10"><b>聊 天 室</b></font></p></div>
+    </div>
+</div>
+
+<div align="center">
+    <div align="center" style="width: 70%;">
+        <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+        <input id="chat-message-input" type="text" size="100"/><br/>
+        <input id="chat-message-submit" type="button" value="发送"/>
+    </div>
+</div>
+
+</body>
+<script>
+    var roomName = 'test';
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName);
+
+
+    chatSocket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        document.querySelector('#chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function (e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+        var messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': '{{ data }}' + '\n' + '{{ user_name }}' + '：' + message
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+</html>
